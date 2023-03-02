@@ -24,14 +24,27 @@
     position: fixed;
     z-index: 1;
     top: 0;
+    display: flex;
+    padding: 5px
+}
+
+.navbar-img {
+    height: 100%;
+    object-fit: contain;
+    overflow: hidden;
+    padding-left: 10px;
 }
 
 .navbar-img1 {
-    height: 50px;
+    max-height: 50px;
+    padding: 3px;
+    object-fit: contain;
 }
 
 .navbar-img2 {
-    height: 30px;
+    max-height: 50px;
+    padding: 10px;
+    object-fit: contain;
 }
 
 .overlay{
@@ -216,11 +229,17 @@
 }
 
 .promoter-header-content-logo {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Vivaldi', sans-serif;
-    font-size: 70pt;
+    font-size: 80pt;
+}
+
+.promoter-header-misc {
+    width: 55%;
+    justify-content: center;
 }
 
 .promoter-spec {
@@ -502,6 +521,14 @@
     background: #474747;
     color: white;
     width: 100%;
+}
+
+.footer-about-company {
+    max-height: 20vh;
+}
+
+.footer-logo {
+    height: 100%
 }
 
 .links ul {list-style-type: none;}
