@@ -1,72 +1,11 @@
 import slider1 from "../assets/slider1.png"
-import slider2 from "../assets/slider2.jpg"
-import slider3 from "../assets/slider3.jpg"
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import Slider from "react-slick";
 import Contactus from "./Contactus/Contactus";
 import Footer from "./Footer";
-import SwipeableViews from 'react-swipeable-views';
-import { useTheme } from '@mui/material/styles';
-import { Card, CardContent, CardMedia, Typography, AppBar, Tabs, Tab, Box } from "@mui/material";
+import { interiorImageList } from "../constants";
+import { Card, CardContent, CardMedia, Typography, Tabs, Tab, Box } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
-
-const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    arrows: false,
-    edgeFriction: 0,
-    responsive: [
-      {
-        breakpoint: 320,
-        settings: { slidesToShow: 1, slidesToScroll: 1, infinite: false }
-      },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 2, slidesToScroll: 1, infinite: false }
-      },
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 3, slidesToScroll: 1, infinite: false }
-      }
-    ]
-  };
-
-const pic1 = "https://assets.architecturaldigest.in/photos/622768e998dec323c94b61bb/16:9/w_1615,h_908,c_limit/How%20to%20design%20a%20small%20living%20room.jpg";
-const pic2 = "https://media.designcafe.com/wp-content/uploads/2019/12/17055334/minimalistic-living-room-interior.jpg"
-const pic3 = "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2019/8/1/1/uo2019_living-room-01-wide-blinds-up-KB2A8968_h.jpg.rend.hgtvcom.966.644.suffix/1564684055231.jpeg"
-const pic4 = "https://images.unsplash.com/photo-1631679706909-1844bbd07221?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bW9kZXJuJTIwbGl2aW5nJTIwcm9vbXxlbnwwfHwwfHw%3D&w=1000&q=80"
-
-const bed1 = "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YmVkcm9vbSUyMGludGVyaW9yfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-const bed2 = "https://assets-news.housing.com/news/wp-content/uploads/2022/01/25201250/Master-bedroom-design-A-pictorial-guide-FB-1200x700-compressed.jpg"
-const bed3 = "https://i.pinimg.com/originals/39/d8/b8/39d8b8d4037a1c1acc02d3183398eab4.jpg"
-const bed4 = "https://loveincorporated.blob.core.windows.net/contentimages/gallery/bee3a290-e386-4480-939e-72659232b588-MM_black_bedroomideas.jpg"
-
-const pictures = {
-    livingRoom: [pic1, pic2, pic3, pic4],
-    bedroom: [bed1, bed2, bed3, bed4],
-    kitchen: [],
-    bathroom: [],
-    diningRoom: [],
-    poojaRoom: []
-}
-
-const locations = [
-    {name: 'Living Room', id: 'livingRoom'}, 
-    {name: 'Bedroom', id: `bedroom`}, 
-    {name: 'Kitchen', id: 'kitchen'}, 
-    {name: 'Bathroom', id: `bathroom`}, 
-    {name: 'Dining Room', id: 'diningRoom'}, 
-    {name: 'Pooja Room', id: `poojaRoom1`}, 
-    {name: 'Pooja Room', id: `poojaRoom2`},
-    {name: 'Pooja Room', id: `poojaRoom3`},
-    {name: 'Pooja Room', id: `poojaRoom4`},
-    {name: 'Pooja Room', id: `poojaRoom`},
-    {name: 'Pooja Room', id: `poojaRoom`},
-]
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -102,17 +41,11 @@ function a11yProps(index) {
 }
 
 const Interior = () => {
-
-    const [activeLoc, setActiveLoc] = useState({name: 'Living Room', id: 'livingRoom'});
-    const theme = useTheme();
+    const [activeImage, setActiveImage] = useState(1)
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-    };
-
-    const handleChangeIndex = (index) => {
-        setValue(index);
     };
 
     return(
@@ -199,30 +132,21 @@ const Interior = () => {
                 </Grid>
             </div>
             <div className="interior-designs">
-                <Box sx={{ bgcolor: 'background.paper'}}>
-                    <AppBar position="static">
-                        <Tabs
-                            value={value}
-                            onChange={handleChange}
-                            indicatorColor="secondary"
-                            textColor="inherit"
-                            variant="fullWidth"
-                            aria-label="full width tabs example"
-                        >
-                            {locations.map((item, index) => {
-                                return <Tab label={item.name} {...a11yProps(index)} />
+                <Box sx={{ width: '100%' }}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                            {interiorImageList.map((item, index) => {
+                                return <Tab label={item.name} {...a11yProps(index)}/>
                             })}
                         </Tabs>
-                    </AppBar>
-                    <SwipeableViews
-                        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                        index={value}
-                        onChangeIndex={handleChangeIndex}
-                    >
-                        {locations.map((item, index) => {
-                            return <TabPanel>{item.name}</TabPanel>
-                        })}   
-                    </SwipeableViews>
+                    </Box>
+                    {interiorImageList.map((item, index) => {
+                        return(
+                            <TabPanel value={value} index={index}>
+                                {item.name}
+                            </TabPanel>
+                        )
+                    })}
                 </Box>
             </div>
             <div>

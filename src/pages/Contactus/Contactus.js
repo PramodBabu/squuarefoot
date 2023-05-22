@@ -10,8 +10,10 @@ const Contactus = (props) => {
     const [phone, setPhone] = useState("")
 
     const handleSubmit = () => {
+        console.log("console", name, email, location, phone)
         if(name !== "" && email !== "" && location !== "" && phone !== "") {
 
+            console.log("if condition")
             let data = {
                 name: name,
                 mail: email,
@@ -19,54 +21,36 @@ const Contactus = (props) => {
                 number: phone
             }
 
-            emailjs.send('SFserviceID', 'SFTemplate', data, 'iK0LHdEqxElH10LrG')
-                .then((result) => {
-                    console.log(result.text);
-                }, (error) => {
-                    console.log(error.text);
-                });
+            emailjs.send('squuare_foot', 'squuareFootEmailTemplate', data, 'pHDAK23iLcsOCXQQC')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
         }
     }
 
     return(
         <div className="contact-us">
+            <h1 class='display-6'>{props.title}</h1>
             <div className="contact-us-align">
-                <span>{props.title}</span>
-                <div style={{padding: `20px`, display: `flex`, flexDirection: `column`}}>
-                    <TextField 
-                        id="standard-basic" 
-                        label="Your Name" 
-                        variant="standard"  
-                        style={{padding: `10px 0`}} 
-                        onChange={(e) => {setName(e.target.value)}}
-                    />
-                    <TextField 
-                        id="standard-basic" 
-                        label="E-Mail ID" 
-                        variant="standard"  
-                        style={{padding: `10px 0`}}
-                        onChange={(e) => {setEmail(e.target.value)}}
-                    />
-                    <TextField 
-                        id="standard-basic" 
-                        label="Location" 
-                        variant="standard"  
-                        style={{padding: `10px 0`}}
-                        onChange={(e) => {setLocation(e.target.value)}}
-                    />
-                    <TextField 
-                        id="standard-basic" 
-                        label="Phone Number" 
-                        variant="standard"  
-                        style={{padding: `10px 0`}}
-                        onChange={(e) => {setPhone(e.target.value)}}
-                    />
-                    <Button 
-                        variant="contained" 
-                        style={{width: `30%`, margin: `20px 0`}}
-                        onClick={handleSubmit}
-                    >Submit</Button>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="name" onChange={e => setName(e.target.value)}/>
+                    <label for="name">Your Name</label>
                 </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="email" onChange={e => setEmail(e.target.value)}/>
+                    <label for="email">E-mail</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="location" placeholder="location" onChange={e => setLocation(e.target.value)}/>
+                    <label for="location">Location/Area</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="mobile" placeholder="mobile" onChange={e => setPhone(e.target.value)}/>
+                    <label for="mobile">Mobile</label>
+                </div>
+                <button type="button" class="btn btn-dark" onClick={handleSubmit} disabled={!(name !== "" && email !== "" && location !== "" && phone !== "")}>Submit</button>
             </div>
         </div>
     )

@@ -1,29 +1,42 @@
-import mainImage from '../../assets/promoterBanner.png'
-import parking from '../../assets/parkingPlan.png'
-import house from '../../assets/housePlan.png'
+import mainImage from '../../assets/promoterBanner.jpg'
+import parking from '../../assets/parkingPlan.jpg'
+import house from '../../assets/housePlan.jpg'
 import map from '../../assets/map.png'
+import buildingRender from '../../assets/promoterHouse.png'
+import promoterFrontView from '../../assets/promotersFrontView.png'
 import Footer from '../Footer'
 import React, { useState } from "react";
 import logoFull from '../../assets/logo.png'
 import 
 { 
-    Button, Modal, Box, Table, TableContainer, TableBody, TableCell, TableHead, TableRow, Paper, Grid  
+    Button, Modal, Box, Table, TableContainer, TableBody, TableCell, TableHead, TableRow, Paper, Grid, Typography 
 } from '@mui/material'
 import Contactus from '../Contactus/Contactus'
-import { promoter_specDetails, promoters_payment_schedule, promoter_gmapURL } from '../../constants'
+import { promoter_specDetails, promoters_payment_schedule, promoter_gmapURL, siteDistances, aboutProject } from '../../constants'
 
+const style = {
+    position: 'absolute',
+    overflowY:'auto',
+    height: '100%',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: `auto`,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    outline: 0,
+  };
 
-
-const modalStyle = {
-    // position: 'absolute',
-    // top: '50%',
-    // left: '50%',
-    // transform: 'translate(-50%, -50%)',
-    // bgcolor: 'background.paper',
-    // boxShadow: 24,
-    // width: '40%',
-    // p: 0,
-    // m: 0
+  
+const contactStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: `auto`,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    outline: 0,
   };
 
 const bannerStyles = {
@@ -35,11 +48,10 @@ const bannerStyles = {
     alignItems: `center`,
     justifyContent: `center`,
     color: `white`,
+    // backgroundColor: `#777777`,
     backgroundColor: `rgba(0,0,0,.6)`,
     backgroundBlendMode: 'multiply',
 }
-  
-
 
 const Promoter = () => {
     
@@ -49,7 +61,8 @@ const Promoter = () => {
     const [planModal, setPlanModal] = useState(false)
 
     const handleOpen = () => setContactModal(true);
-    const handleClose = () => setContactModal(false);
+    const handleContactClose = () => setContactModal(false);
+    const handleGalleryClose = () => setPlanModal(false)
     
     const locations = [
         {name: 'Structure', id: 'structure'}, 
@@ -78,30 +91,31 @@ const Promoter = () => {
                     <div className="promoter-header-misc">
                         <Grid container rowSpacing={2}>
                             <Grid xs={4}>
-                                <p>CMDA Approved</p>
+                                <p style={{paddingLeft: `60px`}}>CMDA Approved</p>
                             </Grid>
                             <Grid xs={4}>
-                                <p>3 Floors</p>
+                                <p style={{paddingLeft: `60px`}}>3 Floors</p>
                             </Grid>
                             <Grid xs={4}>
-                                <p>2 BHK</p>
+                                <p style={{paddingLeft: `60px`}}>2 BHK</p>
                             </Grid>
 
                             <Grid xs={4}>
-                                <p>900 SQ.FT</p>
+                                <p style={{paddingLeft: `60px`}}>901 SQ.FT</p>
                             </Grid>
                             <Grid xs={4}>
-                                <p>6 Units</p>
+                                <p style={{paddingLeft: `60px`}}>6 Units</p>
                             </Grid>
                             <Grid xs={4}>
-                                <p>November 2023</p>
+                                <p style={{paddingLeft: `60px`}}>February 2024</p>
                             </Grid>
                         </Grid>
                     </div>
                 </div>
             </div>
-            <div>
-                <span>About project</span>
+            <div className='promoter-about'>
+                <h1>About project</h1>
+                <p>{aboutProject}</p>
             </div>
             <div className='promoter-spec'>
                 <h1>Project Specifications</h1>
@@ -118,8 +132,8 @@ const Promoter = () => {
                             )
                         })}
                     </div>
-                    <div style={{width: `80%`, color: `black`, fontSize: `15pt`, height: `100%`, paddingLeft: `20px`}}>
-                        <ul style={{height: `100%`, margin: `0px`}}>
+                    <div className='promoter-spec-content'>
+                        <ul style={{height: `100%`, margin: `10px`}}>
                             {promoter_specDetails[activeLoc.id].map(item => {
                                 return <li>{item}</li>
                             })}
@@ -128,70 +142,90 @@ const Promoter = () => {
                 </div>
             </div>
             <div className='promoter-plan'>
-                <img src={parking} onClick={() => openImageModal(parking)}/>
-                <img src={house} onClick={() => openImageModal(house)} />
+                <div className='promoter-plan-left'>
+                    <h2>Project Gallery</h2>
+                </div>
+                <div className='promoter-plan-right'>
+                    <img src={parking} onClick={() => openImageModal(parking)}/>
+                    <img src={house} onClick={() => openImageModal(house)} />
+                    <img src={buildingRender} onClick={() => openImageModal(buildingRender)} />
+                    <img src={promoterFrontView} onClick={() => openImageModal(promoterFrontView)} />
+                </div>
                 <Modal
                     open={planModal}
-                    onClose={() => setPlanModal(false)}
-                    closeAfterTransition
-                    disableEnforceFocus
-                    BackdropProps={{
-                        timeout: 500,
-                    }}
+                    onClose={handleGalleryClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
                 >
-                    <div style={{width: `50% `}}>
-                        <img src={modalImage}/>
-                    </div>
+                    <Box sx={style}>
+                        <img src={modalImage} style={{maxWidth: `50vw`, overflow: `auto`}}/>
+                    </Box>
                 </Modal>
             </div>
             <div className='promoter-location'>
-                <span>Site Location</span>
-                <div className='promoter-location-map'>
+                <div className='promoter-location-left'>
+                    <div className='promoter-location-left-top'>
+                        <h2>Site Location</h2>
+                    </div>
+                    <div className='promoter-location-left-bottom'>
+                        <table class="table table-sm">
+                            <tbody>
+                                {siteDistances.map(item => {
+                                    return(
+                                        <tr style={{color: `white`}}>
+                                            <td>{item.place}</td>
+                                            <td>{item.dist}</td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div className='promoter-location-right'>
                     <a href={promoter_gmapURL} target='_blank'><img src={map} /></a>
                 </div>
             </div>
             <div className='promoter-payment'>
-                <span>Payment Schedule</span>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align="left">Split up</TableCell>
-                                <TableCell align="left">Amount</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                        {promoters_payment_schedule.map((row, index) => (
-                            <TableRow
-                                key={row.name}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {row.name}
-                                </TableCell>
-                                <TableCell align="left">{row.percent}</TableCell>
-                            </TableRow>
-                        ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <h2>Payment Schedule</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope='col'>Split Up</th>
+                            <th scope='col' style={{textAlign: `right`}}>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {promoters_payment_schedule.map(item => {
+                            if (item.name !== "Total")
+                                return(
+                                    <tr>
+                                        <td>{item.name}</td>
+                                        <td style={{textAlign: `right`}}>{item.percent}</td>
+                                    </tr>
+                                )
+                            else
+                                return(
+                                    <tr>
+                                        <th>{item.name}</th>
+                                        <th style={{textAlign: `right`}}>{item.percent}</th>
+                                    </tr>
+                                )
+                        })}
+                    </tbody>
+                </table>
             </div>
             <div className='promoter-appointment'>
-                <span>Make an appointment with us for more details and site visits!</span>
-                <Button onClick={handleOpen}>Open modal</Button>
+                <h1>Make an appointment with us for more details and site visits!</h1>
+                <button type="button" class="btn btn-light m-3" onClick={handleOpen} >Book an Appointment</button>
                 <Modal
                     open={contactModal}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    disableEnforceFocus
-                    // BackdropComponent={Backdrop}
-                    BackdropProps={{
-                    timeout: 500,
-                    }}
+                    onClose={handleContactClose}
                 >
-                    {/* <Button style={{top: `0`, right: `0`, color: `white`}}>X</Button> */}
-                    <Box sx={modalStyle}>
-                        <Contactus />
+                    <Box sx={contactStyle}>
+                        <Contactus 
+                            title="Get in touch with us to know more about the project!"
+                        />
                     </Box>
                 </Modal>
             </div>

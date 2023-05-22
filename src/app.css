@@ -115,22 +115,31 @@
 
 .contact-us {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     height: 100%;
+    width: 30vw;
     align-items: center;
 }
 
 .contact-us-align{
-    padding: 30px;
+    padding: 10px;
     display: flex;
+    text-align: center;
+    justify-content: center;
     flex-direction: column;
     background: white;
     border-radius: 5px;
-    width: 60%;
+    width: 80%;
 }
 
-.contact-us-align span {
-    font-size: 30px;
+.contact-us h1{
+    text-align: center;
+    padding: 20px;
+}
+
+.contact-us-align button{
+    margin: 30px 0px;
 }
 
 /* ///////////////Interior CSS/////////////// */
@@ -154,39 +163,6 @@
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-}
-
-.interior-design-tabs {
-    width: 100%;
-    display: flex;
-    box-shadow: 10px #000;
-}
-
-.interior-active-tab {
-    color: #202020;
-    display: flex;
-    cursor: pointer;
-    background: white;
-    padding: 10px;
-    border-right: 2px solid white;
-    font-size: 30px;
-    margin-bottom: 0px;
-}
-
-.interior-inactive-tab {
-    color:  white;
-    display: flex;
-    cursor: pointer;
-    background: #202020;
-    padding: 10px;
-    border-right: 2px solid white;
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 0px;
-}
-
-.interior-inactive-tab:hover {
-    background: #101010;
 }
 
 /* //////////////Promoters CSS////////////// */
@@ -242,76 +218,195 @@
     justify-content: center;
 }
 
+.promoter-about {
+    height: 40vh;
+    padding: 10px;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: white;
+    background-color: black;
+}
+
+.promoter-about h1{
+    padding: 30px;
+}
+
+.promoter-about p{
+    width: 70%;
+    text-align: center;
+}
+
 .promoter-spec {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    width: 70%;
-    min-height: 40vh;
-    background: white;
-    margin: 30px 0px;
+    justify-content: space-evenly;
+    width: 100%;
+    min-height: 60vh;
+    background: url(/src/assets/promoterSpecBg.jpg);
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.8);
+    background-blend-mode: overlay;
 }
 
 .promoter-spec-div {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 70%;
     height: 30vh;
+    /* background: white;    */
 }
 
 .promoter-spec-tabs {
     width: 100%;
     height: 100%;
-    color: black;
+    color: white;
+    background: #111111;
     display: flex;
     cursor: pointer;
     justify-content: center;
     align-items: center;
     border-color: #eeeeee;
+    border-right: #111111;
     border-style: solid;
-    border-width: 1px 1px 0 1px;
+    border-width: 1px 0px 0px 0px;
 }
 
 .promoter-spec-tabs-selected {
     width: 100%;
     height: 100%;
-    color: white;
+    color: #111111;
     display: flex;
     cursor: pointer;
-    background: black;
     justify-content: center;
     align-items: center;
+    border-left: 7px solid black;
+    border-top: 1px solid white;
 }
 
 .promoter-spec-tabs:hover {
     background: #EBEBEB;
+    color: #111111;
+}
+
+.promoter-spec-content {
+    width: 80%;
+    color: #111111;
+    font-size: 15pt;
+    height: 100%;
+    padding-left: 20px;
 }
 
 .promoter-plan {
     display: flex;
-    width: 100%;
+    width: 80%;
+    height: 70vh;
+}
+
+.promoter-plan-left {
+    display: flex;
+    width: 20%;
+    align-items: center;
+    justify-content: center;
+    object-fit: contain;
+}
+
+.promoter-plan-right {
+    width: 80%;
+    grid-auto-flow: row;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center ;
+}
+
+.promoter-plan-right img{
+    width: 20%;
+    cursor: pointer;
+}
+
+.promoter-plan-right img:hover{
+    position: relative; 
+    box-shadow: 0 0 1px 1px #000;
 }
 
 .promoter-location {
     display: flex;
-    width: 60%;
+    width: 100%;
+    padding: 30px;
+    background-color: #111111;
+    color: white;
+    align-items: center;
+    justify-content: center;
 }
 
-.promoter-location-map img:hover {
+.promoter-location-left {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.promoter-location-left-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.promoter-location-left-bottom {
+    height: 80%;
+    padding: 20px;
+}
+
+.promoter-location-right{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.promoter-location-right a img{
+    width: 100%;
+}
+
+.promoter-location-right a img:hover {
     position: relative; 
     -webkit-box-shadow: inset 0 0 10px 10px #000;    
     -moz-box-shadow: inset 0 0 10px 10px #000;
     box-shadow: inset 0 0 10px 10px #000;
 }
 
-.promoter-plan img {
-    cursor: pointer;
-}
-
 .promoter-payment {
     width: 60%;
+    height: 75vh;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.promoter-payment table tr:nth-child(even){
+    background-color: #fafafa
+}
+
+.promoter-appointment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 0px;
+    align-items: center;
+    width: 100%;
+    height: 30vh;
+    background-color: #111111;
+    color: white;
+}
+
+.promoter-appointment button:hover{
+    border: 1px solid gray;
 }
 
 /* ///////////////Developers CSS///////////////////// */
